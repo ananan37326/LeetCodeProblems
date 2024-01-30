@@ -23,7 +23,7 @@ class Solution:
                 b = int(stack.pop())
                 stack.append(int(b/a))
             else:
-                stack.append(op)
+                stack.append(int(op))
         
         return stack[0]
         
