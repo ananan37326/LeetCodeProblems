@@ -1,25 +1,18 @@
-import collections
-from typing import List
-
-
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        squaredList = collections.deque()
+        squared = deque()
+        l, r = 0, len(nums) - 1
+        
+        while l <= r:
+            left = nums[l] * nums[l]
+            right = nums[r] * nums[r]
 
-        forwardPtr = 0
-        reversePtr = len(nums) - 1
-
-        for i in range(len(nums)):
-            if abs(nums[forwardPtr]) < abs(nums[reversePtr]):
-                squaredList.appendleft(nums[reversePtr]*nums[reversePtr])
-                reversePtr -= 1
+            if left < right:
+                squared.appendleft(right)
+                r -= 1
             else:
-                squaredList.appendleft(nums[forwardPtr]*nums[forwardPtr])
-                forwardPtr += 1
-        return list(squaredList)
+                squared.appendleft(left)
+                l += 1
 
-
-# TEST
-nums = [-4,-3,0,1,2]
-s = Solution()
-print(s.sortedSquares(nums))
+        return squared
+        
